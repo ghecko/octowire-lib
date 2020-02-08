@@ -20,6 +20,7 @@ setup(
     license=__license__,
     description=description,
     author=__authors__,
+    zip_safe=True,
     url='https://bitbucket.org/dooba_core/octowire-lib/',
     install_requires=[
         'pyserial>=3.4,<4',
