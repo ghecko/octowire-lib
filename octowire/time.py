@@ -52,5 +52,4 @@ class Time(Octowire):
         minute = struct.pack("<H", minute)
         second = struct.pack("<H", second)
         self.serial_instance.write(args_size + self.OPCODE_SET_TIME + year + month + day + hour + minute + second)
-        time.sleep(1)
-        self._read_response_code(operation_name="Set time")
+        self._read_response_code(operation_name="Set time", disable_timeout=True)
