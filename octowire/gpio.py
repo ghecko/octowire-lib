@@ -44,7 +44,7 @@ class GPIO(Octowire):
         self.pull_status = None
         self.pin_status = 0
 
-    def _send_operation_code(self, operation_code, operation_name=None):
+    def _send_operation_code(self, operation_code, operation_name=None, disable_timeout=False):
         """
         This function sends an operation code and handles the response code.
         :param operation_code: The operation code (byte).
@@ -52,7 +52,7 @@ class GPIO(Octowire):
         """
         args_size = struct.pack("<H", 2)
         self.serial_instance.write(args_size + self.OPCODE + bytes([self.gpio_pin]) + operation_code)
-        self._read_response_code(operation_name=operation_name)
+        self._read_response_code(operation_name=operation_name, disable_timeout=disable_timeout)
 
     @property
     def direction(self):
@@ -72,11 +72,11 @@ class GPIO(Octowire):
             raise ValueError("Invalid pin direction, the value should be 0 for output or 1 for input.")
         # Configure GPIO pin as output
         if direction == 0:
-            self._send_operation_code(self.OPERATION_OUTPUT, "set GPIO pin as output")
+            self._send_operation_code(operation_code=self.OPERATION_OUTPUT, operation_name="set GPIO pin as output")
             self.direction_status = 1
         # Configure pin as input
         else:
-            self._send_operation_code(self.OPERATION_INPUT, "set GPIO pin as input")
+            self._send_operation_code(operation_code=self.OPERATION_INPUT, operation_name="set GPIO pin as input")
             self.direction_status = 0
 
     @property
@@ -97,29 +97,31 @@ class GPIO(Octowire):
                              " 1 for pull-down or None for pull disabled.")
         # Deactivate pull resistors
         if value is None:
-            self._send_operation_code(self.OPERATION_DEACTIVATE_PULL, "GPIO pull disable")
+            self._send_operation_code(operation_code=self.OPERATION_DEACTIVATE_PULL, operation_name="GPIO pull disable")
             self.pull_status = None
         # Activate pull-up resistor
         if value == 0:
-            self._send_operation_code(self.OPERATION_PULLUP, "GPIO set pull-up")
+            self._send_operation_code(operation_code=self.OPERATION_PULLUP, operation_name="GPIO set pull-up")
             self.pull_status = 0
         # Activate pull-down resistor
         if value == 1:
-            self._send_operation_code(self.OPERATION_PULLDOWN, "GPIO set pull-down")
+            self._send_operation_code(operation_code=self.OPERATION_PULLDOWN, operation_name="GPIO set pull-down")
             self.pull_status = 1
 
     def _set_output_pin_high(self):
         """
         Set the GPIO output pin to high.
         """
-        self._send_operation_code(self.OPERATION_SET_PIN_HIGH, "Set GPIO pin to high")
+        self._send_operation_code(operation_code=self.OPERATION_SET_PIN_HIGH, operation_name="Set GPIO pin to high",
+                                  disable_timeout=True)
         self.pin_status = 1
 
     def _set_output_pin_low(self):
         """
         Set the GPIO output pin to low.
         """
-        self._send_operation_code(self.OPERATION_SET_PIN_LOW, "Set GPIO pin to low")
+        self._send_operation_code(operation_code=self.OPERATION_SET_PIN_LOW, operation_name="Set GPIO pin to low",
+                                  disable_timeout=True)
         self.pin_status = 0
 
     @property
@@ -155,5 +157,5 @@ class GPIO(Octowire):
         :return: The status of the pin (0 for low, 1 for high).
         :rtype: int
         """
-        self._send_operation_code(self.OPERATION_READ_PIN, "GPIO read input pin")
+        self._send_operation_code(operation_code=self.OPERATION_READ_PIN, operation_name="GPIO read input pin")
         return self.serial_instance.read(1)
