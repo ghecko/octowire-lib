@@ -27,6 +27,7 @@ class Octowire:
         self.serial_instance = serial_instance
         self.logger = Logger()
 
+    @property
     def is_connected(self):
         """
         Check octowire serial port connection status.
