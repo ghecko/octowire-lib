@@ -63,14 +63,14 @@ class Octowire:
         :return: bool
         """
         if self.is_connected:
-            current_mode = self.current_mode
+            current_mode = self.mode
             if current_mode == 't':
                 binmode_opcode = b"binmode\n"
                 self.serial_instance.write(binmode_opcode)
                 time.sleep(1)
                 # read local echo
                 self.serial_instance.read(self.serial_instance.in_waiting)
-                if self.current_mode == 'b':
+                if self.mode == 'b':
                     return True
                 else:
                     self.logger.handle("Unable to switch the Octowire to binary mode.", self.logger.ERROR)
@@ -86,14 +86,14 @@ class Octowire:
         :return: bool
         """
         if self.is_connected:
-            current_mode = self.current_mode
+            current_mode = self.mode
             if current_mode == 'b':
                 mode_opcode = b"\x00\x00\x01"
                 self.serial_instance.write(mode_opcode)
                 time.sleep(1)
                 # read local echo
                 self.serial_instance.read(self.serial_instance.in_waiting)
-                if self.current_mode == 't':
+                if self.mode == 't':
                     return True
                 else:
                     self.logger.handle("Unable to switch the Octowire to text mode.", self.logger.ERROR)
@@ -110,7 +110,7 @@ class Octowire:
         :return: Bool
         """
         if self._is_serial_instance:
-            octowire_mode = self.current_mode
+            octowire_mode = self.mode
             if octowire_mode is not None:
                 return True
             else:
@@ -127,7 +127,7 @@ class Octowire:
         """
         if self.octowire_status_is_valid:
             version_opcode = b"\x00\x00\x02"
-            mode = self.current_mode
+            mode = self.mode
             # If the Octowire is in text mode, enter in binary mode
             if mode == "t":
                 self.ensure_binary_mode()
@@ -213,7 +213,7 @@ class Octowire:
         return data
 
     @property
-    def current_mode(self):
+    def mode(self):
         """
         This function sends the 0x0a character to detect the current mode (binary or text).
         :return: 'b' or 't'.
@@ -227,14 +227,14 @@ class Octowire:
         else:
             # If in bin mode, we have to terminate the command (args size + version opcode + empty arguments)
             self.serial_instance.write(b"\x00\x02" + 10 * b"\x00")
-            self._read_response_code(operation_name="Detect current mode")
-            self._read_data(operation_name="Detect current mode")
+            self._read_response_code(operation_name="Get current Octowire's mode")
+            self._read_data(operation_name="Detect current Octowire's mode")
             return "b"
 
-    @current_mode.setter
-    def current_mode(self, value):
+    @mode.setter
+    def mode(self, value):
         """
-        Allow to switch between the binary and textmode.
+        Allow to switch between the binary and text mode.
         :param value: 'b' for binary, 't' for text.
         """
         if value in ["t", "b"]:
