@@ -35,7 +35,7 @@ class Octowire:
         """
         if self._is_serial_instance:
             if self.serial_instance.is_open:
-                if "Octowire" in self.get_octowire_version:
+                if "Octowire" in self.get_octowire_version():
                     return True
                 else:
                     self.logger.handle("Unable to get Octowire version...", self.logger.ERROR)
@@ -119,7 +119,6 @@ class Octowire:
             self.logger.handle("The serial_instance parameter is not a valid Serial instance.", self.logger.ERROR)
             return False
 
-    @property
     def get_octowire_version(self):
         """
         Return the Octowire version.
