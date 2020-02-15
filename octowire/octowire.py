@@ -32,7 +32,7 @@ class Octowire:
         Check octowire serial port connection status.
         :return: Bool
         """
-        if self._is_serial_instance:
+        if self._is_serial_instance():
             if self.serial_instance.is_open:
                 if "Octowire" in self.get_octowire_version():
                     return True
@@ -48,7 +48,6 @@ class Octowire:
                                self.logger.ERROR)
             return False
 
-    @property
     def _is_serial_instance(self):
         """
         Check whether serial_port is a valid Serial instance.
@@ -102,13 +101,12 @@ class Octowire:
             else:
                 return False
 
-    @property
     def octowire_status_is_valid(self):
         """
         Determine whether Octowire is in binary mode.
         :return: Bool
         """
-        if self._is_serial_instance:
+        if self._is_serial_instance():
             octowire_mode = self.mode
             if octowire_mode is not None:
                 return True
@@ -123,7 +121,7 @@ class Octowire:
         Return the Octowire version.
         :return: string (Octowire version).
         """
-        if self.octowire_status_is_valid:
+        if self.octowire_status_is_valid():
             version_opcode = b"\x00\x00\x02"
             mode = self.mode
             # If the Octowire is in text mode, enter in binary mode
