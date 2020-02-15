@@ -27,7 +27,6 @@ class Octowire:
         self.serial_instance = serial_instance
         self.logger = Logger()
 
-    @property
     def is_connected(self):
         """
         Check octowire serial port connection status.
@@ -62,7 +61,7 @@ class Octowire:
         Ensure that the Octowire is in binary mode. Otherwise enter it.
         :return: bool
         """
-        if self.is_connected:
+        if self.is_connected():
             current_mode = self.mode
             if current_mode == 't':
                 binmode_opcode = b"binmode\n"
@@ -85,7 +84,7 @@ class Octowire:
         Ensure that the Octowire is in text mode. Otherwise enter it.
         :return: bool
         """
-        if self.is_connected:
+        if self.is_connected():
             current_mode = self.mode
             if current_mode == 'b':
                 mode_opcode = b"\x00\x00\x01"
