@@ -62,14 +62,14 @@ class Octowire:
         :return: Bool
         """
         if self.is_connected:
-            current_mode = self.detect_current_mode()
+            current_mode = self.detect_current_mode
             if current_mode == 't':
                 binmode_opcode = b"binmode\n"
                 self.serial_instance.write(binmode_opcode)
                 time.sleep(1)
                 # read local echo
                 self.serial_instance.read(self.serial_instance.in_waiting)
-                if self.detect_current_mode() == 'b':
+                if self.detect_current_mode == 'b':
                     return True
                 else:
                     self.logger.handle("Unable to switch the Octowire to binary mode.", self.logger.ERROR)
@@ -86,7 +86,7 @@ class Octowire:
         :return: Bool
         """
         if self._is_serial_instance:
-            octowire_mode = self.detect_current_mode()
+            octowire_mode = self.detect_current_mode
             if octowire_mode is not None:
                 return True
             else:
@@ -103,7 +103,7 @@ class Octowire:
         """
         if self.octowire_status_is_valid:
             version_opcode = b"\x00\x00\x02"
-            mode = self.detect_current_mode()
+            mode = self.detect_current_mode
             # If the Octowire is in text mode, enter in binary mode
             if mode == "t":
                 self.ensure_binary_mode()
@@ -188,6 +188,7 @@ class Octowire:
             data.extend(self._read_chunk(chunk_size, operation_name=operation_name))
         return data
 
+    @property
     def detect_current_mode(self):
         """
         This function sends the 0x0a character to detect the current mode (binary or text).
