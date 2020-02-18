@@ -124,7 +124,7 @@ class Logger:
     def print_tabulate(data, headers):
         """
         Print data in a beautiful tab.
-        :param data: Array.
+        :param data: List of lists.
         :param headers: The headers of the array table.
         :return: Nothing.
         """
