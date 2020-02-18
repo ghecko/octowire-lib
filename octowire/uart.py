@@ -76,7 +76,6 @@ class UART(Octowire):
         self._read_response_code(operation_name="UART receive")
         return self._read_data(expected_size=size, operation_name="UART receive")
 
-    @property
     def in_waiting(self):
         """
         Get available size (waiting to be read).
