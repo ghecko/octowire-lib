@@ -16,7 +16,7 @@ class Colors:
         FAIL = Fore.LIGHTRED_EX
         ENDC = Fore.RESET
         BOLD = Style.BRIGHT
-        MAGENTA = Fore.MAGENTA
+        MAGENTA = Fore.LIGHTMAGENTA_EX
         UNDERLINE = ""
     else:
         HEADER = '\x1b[95m'
