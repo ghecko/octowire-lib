@@ -16,6 +16,7 @@ class Colors:
         FAIL = Fore.RED
         ENDC = Fore.RESET
         BOLD = Style.BRIGHT
+        MAGENTA = Fore.MAGENTA
         UNDERLINE = ""
     else:
         HEADER = '\x1b[95m'
@@ -25,4 +26,5 @@ class Colors:
         FAIL = '\x1b[91m'
         ENDC = '\x1b[0m'
         BOLD = '\x1b[1m'
+        MAGENTA = '\x1b[95m'
         UNDERLINE = '\x1b[4m'
