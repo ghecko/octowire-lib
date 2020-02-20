@@ -25,6 +25,7 @@ setup(
     install_requires=[
         'pyserial>=3.4,<4',
         'tabulate>=0.8.6,<1'
+        'colorama; platform_system == "Windows"'
     ],
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',

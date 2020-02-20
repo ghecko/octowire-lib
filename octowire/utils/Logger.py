@@ -64,7 +64,7 @@ class Logger:
         :param text: Message to be printed.
         :return: Nothing.
         """
-        print("{}[✘]{} {}".format(Colors.FAIL, Colors.ENDC, text))
+        print("{}[-]{} {}".format(Colors.FAIL, Colors.ENDC, text))
 
     @staticmethod
     def _print_success(text):
@@ -73,7 +73,7 @@ class Logger:
         :param text: Message to be printed.
         :return: Nothing.
         """
-        print("{}[✔]{} {}".format(Colors.OKGREEN, Colors.ENDC, text))
+        print("{}[+]{} {}".format(Colors.OKGREEN, Colors.ENDC, text))
 
     @staticmethod
     def _print_info(text):
@@ -91,7 +91,7 @@ class Logger:
         :param text: Message to be printed.
         :return: Nothing.
         """
-        print("{}[✔] {}{}".format(Colors.OKGREEN, text, Colors.ENDC))
+        print("{}[+] {}{}".format(Colors.OKGREEN, text, Colors.ENDC))
 
     @staticmethod
     def _print_user_interact(text):
