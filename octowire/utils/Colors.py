@@ -10,7 +10,7 @@ class Colors:
 
         colorama.init()
         HEADER = Fore.LIGHTMAGENTA_EX
-        OKBLUE = Fore.LIGHTBLUE_EX
+        OKBLUE = Fore.LIGHTCYAN_EX
         OKGREEN = Fore.LIGHTGREEN_EX
         WARNING = Fore.YELLOW
         FAIL = Fore.LIGHTRED_EX
