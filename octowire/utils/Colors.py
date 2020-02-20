@@ -10,10 +10,10 @@ class Colors:
 
         colorama.init()
         HEADER = Fore.LIGHTMAGENTA_EX
-        OKBLUE = Fore.BLUE
-        OKGREEN = Fore.GREEN
+        OKBLUE = Fore.LIGHTBLUE_EX
+        OKGREEN = Fore.LIGHTGREEN_EX
         WARNING = Fore.YELLOW
-        FAIL = Fore.RED
+        FAIL = Fore.LIGHTRED_EX
         ENDC = Fore.RESET
         BOLD = Style.BRIGHT
         MAGENTA = Fore.MAGENTA
