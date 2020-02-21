@@ -60,3 +60,4 @@ def detect_and_connect():
     serial_name = detect_octowire()
     if serial_name is not None:
         return octowire_serial(serial_name)
+    return None

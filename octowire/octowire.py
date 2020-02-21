@@ -34,11 +34,7 @@ class Octowire:
         """
         if self._is_serial_instance():
             if self.serial_instance.is_open:
-                if "Octowire" in self.get_octowire_version():
-                    return True
-                else:
-                    self.logger.handle("Unable to get Octowire version...", self.logger.ERROR)
-                    return False
+                return True
             else:
                 self.logger.handle("Serial port is a valid serial instance but no connection was detected.",
                                    self.logger.ERROR)
@@ -103,14 +99,15 @@ class Octowire:
 
     def octowire_status_is_valid(self):
         """
-        Determine whether Octowire is in binary mode.
+        Determine whether Octowire is in a valid mode (b or t).
         :return: Bool
         """
         if self._is_serial_instance():
             octowire_mode = self.mode
-            if octowire_mode is not None:
+            if octowire_mode in ["t", "b"]:
                 return True
             else:
+                self.logger.handle("Invalid string mode received", self.logger.ERROR)
                 return False
         else:
             self.logger.handle("The serial_instance parameter is not a valid Serial instance.", self.logger.ERROR)
