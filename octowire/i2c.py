@@ -102,7 +102,7 @@ class I2C(Octowire):
         """
         i2c_addresses = bytearray()
         args_size = struct.pack("<H", 2)
-        self.serial_instance.write(args_size + self.OPCODE + self.bus_id + self.OPERATION_SCAN)
+        self.serial_instance.write(args_size + self.OPCODE + bytes([self.bus_id]) + self.OPERATION_SCAN)
         self._read_response_code(operation_name="I2C scan")
         i2c_addresses += self._read_data(operation_name="I2C scan")
         return i2c_addresses
