@@ -95,6 +95,18 @@ class I2C(Octowire):
         self._read_response_code(operation_name="I2C receive")
         return self._read_data(expected_size=size, operation_name="I2C receive")
 
+    def _get_size_scan_data(self):
+        """
+        This function receives the 2 bytes data size to receive from the Octowire and returns it.
+        :return: Size of the list returned by the scan function.
+        :rtype: int
+        """
+        resp = self.serial_instance.read(2)
+        if not resp:
+            raise Exception("Unable to get the size of the data to"
+                            " receive from the Octowire (Operation: {}).".format("I2C scan"))
+        return struct.unpack("<H", resp)[0]
+
     def scan(self):
         """
         Scan I2C bus and return detected slave device addresses.
@@ -104,5 +116,6 @@ class I2C(Octowire):
         args_size = struct.pack("<H", 2)
         self.serial_instance.write(args_size + self.OPCODE + bytes([self.bus_id]) + self.OPERATION_SCAN)
         self._read_response_code(operation_name="I2C scan")
-        i2c_addresses += self._read_data(operation_name="I2C scan")
+        list_size = self._get_size_scan_data()
+        i2c_addresses += self._read_chunk(list_size, operation_name="I2C scan")
         return i2c_addresses
