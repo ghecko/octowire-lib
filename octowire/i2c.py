@@ -56,11 +56,11 @@ class I2C(Octowire):
         :param int_addr: The internal address (internal to the device) at which to read or write data.
         """
         if not isinstance(data, bytes):
-            raise ValueError("'data' parameter is not a bytes instance.")
+            raise ValueError("'i2c.transmit: data' parameter is not a bytes instance.")
         if not isinstance(i2c_addr, int):
-            raise ValueError("'i2c_addr' parameter is not an integer.")
+            raise ValueError("'i2c.transmit: i2c_addr' parameter is not an integer.")
         if not isinstance(int_addr, int):
-            raise ValueError("'int_addr' parameter is not an integer.")
+            raise ValueError("'i2c.transmit: int_addr' parameter is not an integer.")
         data_length = len(data)
         args_size = struct.pack("<H", 8 + data_length)
         i2c_addr = struct.pack("<B", i2c_addr)
@@ -80,11 +80,11 @@ class I2C(Octowire):
         :rtype: bytes
         """
         if not isinstance(size, int):
-            raise ValueError("'size' parameter is not an integer.")
+            raise ValueError("'i2c.receive: size' parameter is not an integer.")
         if not isinstance(i2c_addr, int):
-            raise ValueError("'i2c_addr' parameter is not an integer.")
+            raise ValueError("'i2c.receive: i2c_addr' parameter is not an integer.")
         if not isinstance(int_addr, int):
-            raise ValueError("'int_addr' parameter is not an integer.")
+            raise ValueError("'i2c.receive: int_addr' parameter is not an integer.")
         args_size = struct.pack("<H", 10)
         b_size = struct.pack("<H", size)
         i2c_addr = struct.pack("<B", i2c_addr)
