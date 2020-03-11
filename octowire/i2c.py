@@ -54,7 +54,7 @@ class I2C(Octowire):
         :param data: the payload sent over the I2C interface.
         :param i2c_addr: The I2C address of the slave device with which to communicate.
         :param int_addr: The internal address (internal to the device) at which to read or write data.
-        :param i2c_addr_length: The internal address length.
+        :param i2c_addr_length: The internal address length (byte).
         """
         if not isinstance(data, bytes):
             raise ValueError("'i2c.transmit: data' parameter is not a bytes instance.")
@@ -79,7 +79,7 @@ class I2C(Octowire):
         :param size: the number of bytes to receive.
         :param i2c_addr: The target chip I2C address.
         :param int_addr: The internal address of the target chip.
-        :param int_addr_length: The internal address length.
+        :param int_addr_length: The internal address length (byte).
         :return: The read bytes.
         :rtype: bytes
         """
