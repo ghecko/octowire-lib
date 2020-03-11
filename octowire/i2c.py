@@ -48,12 +48,13 @@ class I2C(Octowire):
                                    baudrate)
         self._read_response_code(operation_name="I2C configuration")
 
-    def transmit(self, data, i2c_addr, int_addr):
+    def transmit(self, data, i2c_addr, int_addr, int_addr_length):
         """
         Transmit data over the I2C interface.
         :param data: the payload sent over the I2C interface.
         :param i2c_addr: The I2C address of the slave device with which to communicate.
         :param int_addr: The internal address (internal to the device) at which to read or write data.
+        :param i2c_addr_length: The internal address length.
         """
         if not isinstance(data, bytes):
             raise ValueError("'i2c.transmit: data' parameter is not a bytes instance.")
@@ -61,21 +62,24 @@ class I2C(Octowire):
             raise ValueError("'i2c.transmit: i2c_addr' parameter is not an integer.")
         if not isinstance(int_addr, int):
             raise ValueError("'i2c.transmit: int_addr' parameter is not an integer.")
+        if not isinstance(int_addr_length, int):
+            raise ValueError("'i2c.transmit: i2c_addr_length' parameter is not an integer")
         data_length = len(data)
         args_size = struct.pack("<H", 8 + data_length)
         i2c_addr = struct.pack("<B", i2c_addr)
         int_addr = struct.pack("<L", int_addr)
-        int_addr_length = 0x02
+        int_addr_length = struct.pack("<B", int_addr_length)
         self.serial_instance.write(args_size + self.OPCODE + bytes([self.bus_id]) + self.OPERATION_TRANSMIT
-                                   + i2c_addr + int_addr + bytes([int_addr_length]) + data)
+                                   + i2c_addr + int_addr + int_addr_length + data)
         self._read_response_code(operation_name="I2C transmit")
 
-    def receive(self, size, i2c_addr, int_addr):
+    def receive(self, size, i2c_addr, int_addr, int_addr_length):
         """
         This function receive a number bytes from the I2C interface.
         :param size: the number of bytes to receive.
         :param i2c_addr: The target chip I2C address.
         :param int_addr: The internal address of the target chip.
+        :param int_addr_length: The internal address length.
         :return: The read bytes.
         :rtype: bytes
         """
@@ -85,13 +89,15 @@ class I2C(Octowire):
             raise ValueError("'i2c.receive: i2c_addr' parameter is not an integer.")
         if not isinstance(int_addr, int):
             raise ValueError("'i2c.receive: int_addr' parameter is not an integer.")
+        if not isinstance(int_addr_length, int):
+            raise ValueError("'i2c.transmit: i2c_addr_length' parameter is not an integer")
         args_size = struct.pack("<H", 10)
         b_size = struct.pack("<H", size)
         i2c_addr = struct.pack("<B", i2c_addr)
         int_addr = struct.pack("<L", int_addr)
-        int_addr_length = 0x02
+        int_addr_length = struct.pack("<B", int_addr_length)
         self.serial_instance.write(args_size + self.OPCODE + bytes([self.bus_id]) + self.OPERATION_RECEIVE
-                                   + i2c_addr + int_addr + bytes([int_addr_length]) + b_size)
+                                   + i2c_addr + int_addr + int_addr_length + b_size)
         self._read_response_code(operation_name="I2C receive")
         return self._read_data(expected_size=size, operation_name="I2C receive")
 
