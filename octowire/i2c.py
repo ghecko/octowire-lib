@@ -90,7 +90,7 @@ class I2C(Octowire):
         if not isinstance(int_addr, int):
             raise ValueError("'i2c.receive: int_addr' parameter is not an integer.")
         if not isinstance(int_addr_length, int):
-            raise ValueError("'i2c.transmit: i2c_addr_length' parameter is not an integer")
+            raise ValueError("'i2c.receive: i2c_addr_length' parameter is not an integer")
         args_size = struct.pack("<H", 10)
         b_size = struct.pack("<H", size)
         i2c_addr = struct.pack("<B", i2c_addr)
