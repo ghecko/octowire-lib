@@ -7,11 +7,44 @@
 # Jordan Ovrè / Ghecko <ghecko78@gmail.com
 
 
+import codecs
 import shutil
 
 
 from octowire.utils.Colors import Colors
 from tabulate import tabulate
+
+
+class _Progress:
+    """
+    Progress logger is used to dynamically print records.
+    """
+    def __init__(self, header=''):
+        self.header = header
+        self.full_msg = ''
+
+    def status(self, msg):
+        """
+        Dynamically print character on the same line by calling it multiple time.
+        :param msg: The text to print.
+        :return: Nothing.
+        """
+        # if msg is a white character, convert it to its hex representation
+        if msg.isspace() and msg != " ":
+            self.full_msg += '0x{}'.format(codecs.encode(bytes(msg, 'utf-8'), 'hex').decode())
+        else:
+            self.full_msg += msg
+        print('{}: {}'.format(self.header, self.full_msg), end='\r', flush=True)
+
+    def stop(self):
+        """
+        Stop the dynamic printer process instance.
+        :return: Nothing.
+        """
+        if self.full_msg == '':
+            print(end='', flush=False)
+        else:
+            print(flush=False)
 
 
 class Logger:
@@ -133,3 +166,11 @@ class Logger:
             print("\n{}\n".format(tabulate(data, headers=headers, tablefmt="fancy_grid")))
         else:
             print("\n{}\n".format(tabulate(data, headers=headers, tablefmt="rst")))
+
+    @staticmethod
+    def progress(header):
+        """
+        Creates a new progress logger.
+        :return: _Progress class instance.
+        """
+        return _Progress(header)
