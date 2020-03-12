@@ -14,7 +14,7 @@ from octowire.time import Time
 from serial.tools import list_ports
 
 
-def detect_octowire():
+def detect_octowire(verbose=True):
     """
     Iterate over serial devices to find the Octowire, returning the serial port.
     :return: Octowire port or None.
@@ -22,13 +22,16 @@ def detect_octowire():
     ports_list = list_ports.comports(include_links=True)
     for port in ports_list:
         if port.vid == 0xc0de and port.pid == 0x0c70:
-            Logger().handle("Octowire found: {}".format(port.device), Logger.RESULT)
+            if verbose:
+                Logger().handle("Octowire found: {}".format(port.device), Logger.RESULT)
             return port.device
         if port.vid == 0xc0de and port.pid == 0xb007:
-            Logger().handle("Octowire found in bootloader mode, please press the reset button and retry...",
-                            Logger.ERROR)
+            if verbose:
+                Logger().handle("Octowire found in bootloader mode, please press the reset button and retry...",
+                                Logger.ERROR)
             return None
-    Logger().handle("Octowire not found...", Logger.ERROR)
+    if verbose:
+        Logger().handle("Octowire not found...", Logger.ERROR)
     return None
 
 
