@@ -61,11 +61,10 @@ class UART(Octowire):
         self.serial_instance.write(args_size + self.OPCODE + bytes([self.interface_id]) + self.OPERATION_TRANSMIT + data)
         self._read_response_code(operation_name="UART transmit")
 
-    def receive(self, size, timeout=None):
+    def receive(self, size):
         """
         This function receives a number of bytes from the UART interface.
         :param size: the number of bytes to receive.
-        :param timeout: The maximum amount of time waiting for data. If not set, wait indefinitely.
         :return: the received bytes.
         :rtype: bytes
         """
@@ -75,13 +74,7 @@ class UART(Octowire):
         b_size = struct.pack("<H", size)
         self.serial_instance.write(args_size + self.OPCODE + bytes([self.interface_id]) +
                                    self.OPERATION_RECEIVE + b_size)
-        if not timeout:
-            self._read_response_code(operation_name="UART receive", disable_timeout=True)
-        else:
-            old_timeout = self.serial_instance.timeout
-            self.serial_instance.timeout = timeout
-            self._read_response_code(operation_name="UART receive")
-            self.serial_instance.timeout = old_timeout
+        self._read_response_code(operation_name="UART receive", disable_timeout=True)
         return self._read_data(expected_size=size, operation_name="UART receive")
 
     def in_waiting(self):
