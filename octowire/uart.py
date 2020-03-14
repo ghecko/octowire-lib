@@ -74,8 +74,20 @@ class UART(Octowire):
         b_size = struct.pack("<H", size)
         self.serial_instance.write(args_size + self.OPCODE + bytes([self.interface_id]) +
                                    self.OPERATION_RECEIVE + b_size)
-        self._read_response_code(operation_name="UART receive", disable_timeout=True)
-        return self._read_data(expected_size=size, operation_name="UART receive")
+        self._read_response_code(operation_name="UART receive read response code", disable_timeout=True)
+        return self._read_data(expected_size=size, operation_name="UART receive data")
+
+    def _get_available_size(self):
+        """
+        This function receives the 2 bytes data size to receive from the Octowire and returns it.
+        :return: Available size.
+        :rtype: int
+        """
+        resp = self.serial_instance.read(2)
+        if not resp:
+            raise Exception("Unable to get the size of the data to"
+                            " receive from the Octowire (Operation: {}).".format("UART in_waiting"))
+        return struct.unpack("<H", resp)[0]
 
     def in_waiting(self):
         """
@@ -87,7 +99,7 @@ class UART(Octowire):
         self.serial_instance.write(args_size + self.OPCODE + bytes([self.interface_id]) +
                                    self.OPERATION_GET_AVAILABLE_SIZE)
         self._read_response_code(operation_name="UART receive")
-        return int(self._read_data(operation_name="UART receive"))
+        return self._get_available_size()
 
     def passthrough(self):
         """
