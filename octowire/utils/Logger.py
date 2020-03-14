@@ -10,9 +10,9 @@
 import codecs
 import shutil
 
-
+from beautifultable import BeautifulTable
+from beautifultable import ALIGN_LEFT
 from octowire.utils.Colors import Colors
-from tabulate import tabulate
 
 
 class _Progress:
@@ -163,9 +163,33 @@ class Logger:
         """
         t_width, _ = shutil.get_terminal_size()
         if t_width >= 95:
-            print("\n{}\n".format(tabulate(data, headers=headers, tablefmt="fancy_grid")))
+            table = BeautifulTable(max_width=95, default_alignment=ALIGN_LEFT)
         else:
-            print("\n{}\n".format(tabulate(data, headers=headers, tablefmt="rst")))
+            table = BeautifulTable(max_width=t_width, default_alignment=ALIGN_LEFT)
+
+        # Convert dictionary headers into list and bold it
+        headers_list = []
+        for key, value in headers.items():
+            value = Colors.BOLD + value + Colors.ENDC
+            headers_list.append(value)
+        table.column_headers = headers_list
+
+        # Convert dictionary data to list
+        for entry in data:
+            row = []
+            for key, value in entry.items():
+                row.append(value)
+            table.append_row(row)
+
+        # change table style
+        table.set_style(BeautifulTable.STYLE_BOX_ROUNDED)
+        table.header_separator_char = '═'
+        table.intersect_header_left = '╞'
+        table.intersect_header_mid = '╪'
+        table.intersect_header_right = '╡'
+
+        # Print table
+        print("\n{}\n".format(table))
 
     @staticmethod
     def progress(header):

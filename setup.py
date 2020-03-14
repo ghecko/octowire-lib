@@ -24,7 +24,7 @@ setup(
     url='https://bitbucket.org/dooba_core/octowire-lib/',
     install_requires=[
         'pyserial>=3.4,<4',
-        'tabulate>=0.8.6,<1'
+        'beautifultable>=0.8.0'
         'colorama; platform_system == "Windows"'
     ],
     classifiers=[
