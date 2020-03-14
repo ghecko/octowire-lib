@@ -194,12 +194,12 @@ class Octowire:
         :rtype: bytes
         """
         data = bytearray()
-        if expected_size:
+        if expected_size is not None:
             while expected_size > 0:
                 chunk_size = self._get_size_read_data(operation_name)
                 data.extend(self._read_chunk(chunk_size, operation_name=operation_name))
                 expected_size = expected_size - chunk_size
-        # When the size of data to receive is not known, for version for example, read only the first chunk
+        # When the size of data to receive is not known, for get Octowire version for example, read only the first chunk
         else:
             chunk_size = self._get_size_read_data(operation_name)
             data.extend(self._read_chunk(chunk_size, operation_name=operation_name))
