@@ -86,6 +86,7 @@ class SPI(Octowire):
             raise ValueError("'data' parameter is not a bytes instance.")
         data_length = len(data)
         args_size = struct.pack("<H", 2 + data_length)
-        self.serial_instance.write(args_size + self.OPCODE + self.bus_id + self.OPERATION_TRANSMIT_RECEIVE + data)
+        self.serial_instance.write(args_size + self.OPCODE + bytes([self.bus_id]) +
+                                   self.OPERATION_TRANSMIT_RECEIVE + data)
         self._read_response_code(operation_name="SPI transmit&receive")
         self._read_data(operation_name="SPI transmit&receive")
