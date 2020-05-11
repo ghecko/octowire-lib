@@ -89,4 +89,4 @@ class SPI(Octowire):
         self.serial_instance.write(args_size + self.OPCODE + bytes([self.bus_id]) +
                                    self.OPERATION_TRANSMIT_RECEIVE + data)
         self._read_response_code(operation_name="SPI transmit&receive")
-        self._read_data(operation_name="SPI transmit&receive")
+        return self._read_data(operation_name="SPI transmit&receive")
