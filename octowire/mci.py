@@ -17,7 +17,7 @@ class MCI(Octowire):
     MCI protocol class.
     The MCI protocol allows access to the Octowire's Memory Card interface.
     """
-    OPCODE = b"\x0c"
+    OPCODE = b"\x0d"
     OPERATION_DETECT = b"\x01"
     OPERATION_TRANSMIT = b"\x02"
     OPERATION_RECEIVE = b"\x03"

@@ -15,7 +15,7 @@ class I2C(Octowire):
     """
     I2C protocol class.
     """
-    OPCODE = b"\x0b"
+    OPCODE = b"\x0c"
     OPERATION_CONFIGURE = b"\x01"
     OPERATION_TRANSMIT = b"\x02"
     OPERATION_RECEIVE = b"\x03"

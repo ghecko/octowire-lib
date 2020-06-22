@@ -15,7 +15,7 @@ class SPI(Octowire):
     """
     SPI protocol class.
     """
-    OPCODE = b"\x0a"
+    OPCODE = b"\x0b"
     OPERATION_CONFIGURE = b"\x01"
     OPERATION_TRANSMIT = b"\x02"
     OPERATION_RECEIVE = b"\x03"

@@ -15,7 +15,7 @@ class UART(Octowire):
     """
     UART protocol class.
     """
-    OPCODE = b"\x09"
+    OPCODE = b"\x0a"
     OPERATION_CONFIGURE = b"\x01"
     OPERATION_TRANSMIT = b"\x02"
     OPERATION_RECEIVE = b"\x03"

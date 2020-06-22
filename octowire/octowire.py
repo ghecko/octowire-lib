@@ -144,7 +144,7 @@ class Octowire:
         else:
             return None
 
-    def _read_response_code(self, operation_name=None, disable_timeout=None):
+    def _read_response_code(self, operation_name=None, disable_timeout=False):
         """
         This function handles reading the response code.
         :param operation_name: String Octowire operation name.
