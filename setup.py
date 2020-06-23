@@ -4,10 +4,10 @@
 from setuptools import setup, find_packages
 
 __authors__ = "Jordan Ovrè, Paul Duncan"
-__copyright__ = "Copyright (c) Jordan Ovrè / Paul Duncan"
-__license__ = "GPLv3"
+__copyright__ = "Copyright (c) ImmunIT - Jordan Ovrè / Paul Duncan"
+__license__ = "Apache 2.0"
 __version__ = "1.0.0"
-__contact__ = "Jordan Ovrè / Ghecko <ghecko78@gmail.com>, Paul Duncan / Eresse <eresse@dooba.io>"
+__contact__ = "Jordan Ovrè / Ghecko <jovre@immunit.ch>, Paul Duncan / Eresse <pduncan@immunit.ch>"
 
 description = 'Octowire library'
 name = 'octowire'
@@ -21,14 +21,14 @@ setup(
     description=description,
     author=__authors__,
     zip_safe=True,
-    url='https://bitbucket.org/dooba_core/octowire-lib/',
+    url='https://github.com/immunIT/octowire-lib/',
     install_requires=[
         'pyserial>=3.4,<4',
         'beautifultable>=0.8.0'
         'colorama; platform_system == "Windows"'
     ],
     classifiers=[
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python :: 3',
         'Development Status :: 3 - Alpha'
     ],
