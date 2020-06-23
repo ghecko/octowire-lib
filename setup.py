@@ -13,12 +13,17 @@ description = 'Octowire library'
 name = 'octowire'
 
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name=name,
     version=__version__,
     packages=find_packages(),
     license=__license__,
     description=description,
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author=__authors__,
     zip_safe=True,
     url='https://github.com/immunIT/octowire-lib/',
@@ -35,4 +40,5 @@ setup(
         'Development Status :: 5 - Production/Stable'
     ],
     keywords=['octowire', 'library', 'hardware', 'security', 'pentest'],
+    python_requires='>=3.7',
 )
