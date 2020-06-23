@@ -22,15 +22,17 @@ setup(
     author=__authors__,
     zip_safe=True,
     url='https://github.com/immunIT/octowire-lib/',
+    download_url = 'https://github.com/immunIT/octowire-lib/archive/1.0.0.tar.gz'
     install_requires=[
         'pyserial>=3.4,<4',
         'beautifultable>=0.8.0'
         'colorama; platform_system == "Windows"'
     ],
     classifiers=[
+        'Intended Audience :: Developers'
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python :: 3',
-        'Development Status :: 3 - Alpha'
+        'Development Status :: 5 - Production/Stable'
     ],
     keywords=['octowire', 'library', 'hardware', 'security', 'pentest'],
 )
