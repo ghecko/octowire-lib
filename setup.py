@@ -22,7 +22,7 @@ setup(
     author=__authors__,
     zip_safe=True,
     url='https://github.com/immunIT/octowire-lib/',
-    download_url = 'https://github.com/immunIT/octowire-lib/archive/1.0.0.tar.gz'
+    download_url = 'https://github.com/immunIT/octowire-lib/archive/1.0.0.tar.gz',
     install_requires=[
         'pyserial>=3.4,<4',
         'beautifultable>=0.8.0'
