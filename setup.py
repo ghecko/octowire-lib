@@ -29,7 +29,7 @@ setup(
         'colorama; platform_system == "Windows"'
     ],
     classifiers=[
-        'Intended Audience :: Developers'
+        'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python :: 3',
         'Development Status :: 5 - Production/Stable'
