@@ -12,5 +12,5 @@ The full documentation can be found here: [octowire library documentation](https
 $ python setup.py install
 
 # From PyPi
-$ pip install octowire
+$ pip install octowire-lib
 ```
