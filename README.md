@@ -3,7 +3,7 @@
 
 A full python module which can be used to interface the Octowire from a python script.
 
-The full documentation can be found here: [octowire library documentation](https://bitbucket.org/octowire/octowire-lib/wiki/Home)
+The full documentation can be found here: [octowire library documentation](https://github.com/immunIT/octowire-lib/wiki)
 
 ## Installing
 
