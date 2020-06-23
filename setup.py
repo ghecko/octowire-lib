@@ -10,7 +10,7 @@ __version__ = "1.0.0"
 __contact__ = "Jordan Ovrè / Ghecko <jovre@immunit.ch>, Paul Duncan / Eresse <pduncan@immunit.ch>"
 
 description = 'Octowire library'
-name = 'octowire'
+name = 'octowire-lib'
 
 
 with open("README.md", "r") as fh:
