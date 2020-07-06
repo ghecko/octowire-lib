@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 __authors__ = "Jordan Ovrè, Paul Duncan"
 __copyright__ = "Copyright (c) ImmunIT - Jordan Ovrè / Paul Duncan"
 __license__ = "Apache 2.0"
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __contact__ = "Jordan Ovrè / Ghecko <jovre@immunit.ch>, Paul Duncan / Eresse <pduncan@immunit.ch>"
 
 description = 'Octowire library'
@@ -27,7 +27,7 @@ setup(
     author=__authors__,
     zip_safe=True,
     url='https://github.com/immunIT/octowire-lib/',
-    download_url = 'https://github.com/immunIT/octowire-lib/archive/1.0.1.tar.gz',
+    download_url='https://github.com/immunIT/octowire-lib/archive/1.0.2.tar.gz',
     install_requires=[
         'pyserial>=3.4,<4',
         'beautifultable>=0.8.0'
