@@ -11,7 +11,7 @@ import codecs
 import shutil
 
 from beautifultable import BeautifulTable
-from beautifultable import ALIGN_LEFT
+from beautifultable import ALIGN_LEFT, STYLE_BOX_ROUNDED
 from octowire.utils.Colors import Colors
 
 
@@ -163,30 +163,30 @@ class Logger:
         """
         t_width, _ = shutil.get_terminal_size()
         if t_width >= 95:
-            table = BeautifulTable(max_width=95, default_alignment=ALIGN_LEFT)
+            table = BeautifulTable(maxwidth=95, default_alignment=ALIGN_LEFT)
         else:
-            table = BeautifulTable(max_width=t_width, default_alignment=ALIGN_LEFT)
+            table = BeautifulTable(maxwidth=t_width, default_alignment=ALIGN_LEFT)
 
         # Convert dictionary headers into list and bold it
         headers_list = []
         for key, value in headers.items():
             value = Colors.BOLD + value + Colors.ENDC
             headers_list.append(value)
-        table.column_headers = headers_list
+        table.columns.header = headers_list
 
         # Convert dictionary data to list
         for entry in data:
             row = []
             for key, value in entry.items():
                 row.append(value)
-            table.append_row(row)
+            table.rows.append(row)
 
         # change table style
-        table.set_style(BeautifulTable.STYLE_BOX_ROUNDED)
-        table.header_separator_char = '═'
-        table.intersect_header_left = '╞'
-        table.intersect_header_mid = '╪'
-        table.intersect_header_right = '╡'
+        table.set_style(STYLE_BOX_ROUNDED)
+        table.columns.header.separator = '═'
+        table.columns.header.junction = '╪'
+        table.border.header_left = '╞'
+        table.border.header_right = '╡'
 
         # Print table
         print("\n{}\n".format(table))
