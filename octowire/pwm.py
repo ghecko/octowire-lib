@@ -41,12 +41,12 @@ class PWM(Octowire):
     def set(self, frequency=1000000, duty_cycle=500):
         """
         Set the PWM.
-        :param frequency: PWM frequency (2Hz to 100MHz).
+        :param frequency: PWM frequency (0Hz to 60MHz).
         :param duty_cycle: Duty cycle in per mille  (0 to 1000‰).
         :return: 6 Bytes (4 bytes for effective frequency + 2 bytes for effective duty cycle).
         """
-        if frequency not in range(2, 100000000):
-            raise ValueError('PWM frequency should be defined between 2 and 100 000 000 (0Hz to 100MHz)')
+        if frequency not in range(0, 60000000):
+            raise ValueError('PWM frequency should be defined between 0 and 60 000 000 (0Hz to 60MHz)')
         if duty_cycle not in range(0, 1000):
             raise ValueError('PWM duty cycle should be defined between 0 and 1000 per mille')
         frequency = struct.pack("<L", frequency)
