@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 __authors__ = "Jordan Ovrè, Paul Duncan"
 __copyright__ = "Copyright (c) ImmunIT - Jordan Ovrè / Paul Duncan"
 __license__ = "Apache 2.0"
-__version__ = "1.0.5"
+__version__ = "1.0.6"
 __contact__ = "Jordan Ovrè / Ghecko <jovre@immunit.ch>, Paul Duncan / Eresse <pduncan@immunit.ch>"
 
 description = 'Octowire library'

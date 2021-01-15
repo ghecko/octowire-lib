@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2020-01-15
+
+### Added
+
+### Changed
+
+- Improve MCI protocol interaction (address access instead of block access)
+
 ## [1.0.5] - 2020-01-07
 
 ### Added
