@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Improve MCI protocol interaction (address access instead of block access)
+- Improved MCI protocol interaction (address access instead of block access)
 
 ## [1.0.5] - 2020-01-07
 
@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Update allowed PWM frequency
+- Updated allowed PWM frequency
 
 ## [1.0.4] - 2020-10-16
 
@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Update BeautifulTable to v1.0.0
+- Updated BeautifulTable to v1.0.0
 
 ## [1.0.2] - 2020-07-06
 

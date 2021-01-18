@@ -71,7 +71,7 @@ class MCI(Octowire):
 
     def _transmit_op(self, data, block_nb):
         """
-        Craft the structure and send it to the Octowire hardware to write into the Memory Card
+        Craft the structure and send it to the Octowire hardware to write into the Memory Card.
         :param data: the data (bytes) to send through the MCI interface.
         :param block_nb: The index of the block to write.
         """
@@ -84,9 +84,8 @@ class MCI(Octowire):
         """
         Transmit data through the MCI interface.
         :param data: the data (bytes) to send through the MCI interface.
-        :param start_addr: The address to start writing.
-        :param keep_existing: If true, keep existing data at end of the latest block if there is not enough
-        data to fill it.
+        :param start_addr: The address at which to start writing.
+        :param keep_existing: If true, keep any pre-existing when writing incomplete blocks.
         :return: Nothing
         """
         if not isinstance(data, bytes):
@@ -158,7 +157,7 @@ class MCI(Octowire):
         """
         This function receives the number of bytes from the MCI interface (starting at the defined address).
         :param size: the number of bytes to receive.
-        :param start_addr: The address to start reading.
+        :param start_addr: The address at which to start reading.
         :return: the read bytes.
         :rtype: bytes
         """
